@@ -43,5 +43,11 @@ describe('./bands endpoint', () => {
         const responseData = JSON.parse(response.text)
         expect(responseData.length).toBe(3)
     }); 
-    
+describe('./musicians/:id endpoint', () => {
+    test('can get drake', async () => {
+        const musician2 = await request(app).get("/musicians/2")
+        const responseData = JSON.parse(musician2.text)
+        expect(responseData.name).toBe("Drake")
+    });
+});
 });

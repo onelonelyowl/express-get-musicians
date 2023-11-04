@@ -8,8 +8,8 @@ const port = 3000;
 app.get('/musicians', async (req, res) => {
     res.json(await Musician.findAll())
 })
-app.get('/musicians/1', async (req, res) => {
-    res.json(await Musician.findByPk(1))
+app.get('/musicians/:id', async (req, res) => {
+    res.json(await Musician.findByPk(req.params.id))
 })
 
 app.get('/bands', async (req, res) => {

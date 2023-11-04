@@ -49,5 +49,8 @@ describe('./musicians/:id endpoint', () => {
         const responseData = JSON.parse(musician2.text)
         expect(responseData.name).toBe("Drake")
     });
+    test('testing post', async () => {
+        // not sure what to put here
+    });
 });
 });

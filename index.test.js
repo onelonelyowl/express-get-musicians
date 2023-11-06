@@ -35,11 +35,11 @@ describe('./musicians/1 endpoint', () => {
 });
 describe('./bands endpoint', () => {
     it('testing successful get', async () => {
-        const response = await request(app).get("/bands")
+        const response = await request(app).get("/bands/")
         expect(response.statusCode).toBe(200)
     });
     it('should retrieve all bands', async () => {
-        const response = await request(app).get("/bands")
+        const response = await request(app).get("/bands/")
         const responseData = JSON.parse(response.text)
         expect(responseData.length).toBe(3)
     }); 
@@ -54,4 +54,15 @@ describe('./musicians/:id endpoint', () => {
         expect(JSON.parse(postedMusician.text)).toEqual(expect.objectContaining({name: "Ozzy", instrument: "Guitar"}))
     });
 });
+});
+
+describe('testing associations/band files', () => {
+    test('finds bands with musicians', async () => {
+        const response = await request(app).get('/bands/musicians')
+        expect(JSON.parse(response.text)[0]).toHaveProperty('musicians')
+    });
+    test('find specific band with musicians', async () => {
+        const response = await request(app).get('/bands/2/musicians')
+        expect(JSON.parse(response.text)[0]).toHaveProperty('musicians')
+    });
 });

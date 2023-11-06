@@ -20,8 +20,7 @@ app.get('/bands', async (req, res) => {
 })
 
 app.post('/musicians', async (req, res) => {
-    await Musician.create(req.body)
-    res.send("New Musician created")
+    res.json(await Musician.create(req.body))
 })
 app.put('/musicians/:id', async (req, res) => {
     const musicianToReplace = await Musician.findByPk(req.params.id)

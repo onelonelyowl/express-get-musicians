@@ -50,7 +50,8 @@ describe('./musicians/:id endpoint', () => {
         expect(responseData.name).toBe("Drake")
     });
     test('testing post', async () => {
-        // not sure what to put here
+        const postedMusician = await request(app).post('/musicians').send({name: "Ozzy", instrument: "Guitar"})
+        expect(JSON.parse(postedMusician.text)).toEqual(expect.objectContaining({name: "Ozzy", instrument: "Guitar"}))
     });
 });
 });

@@ -2,6 +2,7 @@ const express = require('express')
 const bands = express.Router()
 const { Band } = require('../models/Band')
 const { Musician } = require('../models/Musician')
+const {check, validationResult} = require('express-validator')
 
 bands.get('/', async (req, res) => {
     res.json(await Band.findAll())

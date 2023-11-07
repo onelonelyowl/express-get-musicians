@@ -66,3 +66,18 @@ describe('testing associations/band files', () => {
         expect(JSON.parse(response.text)[0]).toHaveProperty('musicians')
     });
 });
+
+describe('checking that server side validation works', () => {
+    it('for name being empty', async () => {
+        const response = await request(app).post('/musicians/').send({name: "", instrument: "guitar"})
+        expect(JSON.parse(response.text)).toHaveProperty("errors")
+    });
+    it('for name being too short', async () => {
+        const response = await request(app).post('/musicians/').send({name: "w", instrument: "guitar"})
+        expect(JSON.parse(response.text)).toHaveProperty("errors")
+    });
+    it('for name being too long', async () => {
+        const response = await request(app).post('/musicians/').send({name: "wdhuiadhuiwagdhuiywkacyuwavbcyuiwavcuiawcvauiwyvdytgaa", instrument: "guitar"})
+        expect(JSON.parse(response.text)).toHaveProperty("errors")
+    });
+});
